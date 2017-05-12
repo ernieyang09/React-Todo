@@ -3,7 +3,7 @@ require('./assets/style/style.css');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ToDoHeader from './components/ToDoHeader';
-import ToDoConstants from './constants/ToDoConstants';
+import ToDoStore from './stores/ToDoStore';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class App extends React.Component {
 
   }
   render(){
-    return (<div>Hello World!</div>);
+    return (<div><ToDoHeader text='請輸入代辦事項' /></div>);
   }
 }
 
