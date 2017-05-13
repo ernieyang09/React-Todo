@@ -1,11 +1,13 @@
 import ToDoDispatcher from '../dispatcher/ToDoDispatcher';
 import ToDoConstants from '../constants/ToDoConstants';
 
-const ToDoActions = {
+const ToDoAction = {
   ToDoCreate: function(text){
-    ToDoDispatcher.dispatchEvent({
+    ToDoDispatcher.dispatch({
       actionType:ToDoConstants.TODO_CREATE,
       text:text
     });
   }
 }
+
+export default ToDoAction;

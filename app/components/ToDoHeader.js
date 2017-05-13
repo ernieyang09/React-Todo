@@ -8,24 +8,23 @@ class ToDoHeader extends Component {
     this.onAdd = this.onAdd.bind(this);
   }
 
-  PropTypes:{
-    text:PropTypes.string
-  }
 
   onAdd(){
     let newToDo = this.refs.txtToDo.value.trim();
-    console.log(newToDo);
+    ToDoAction.ToDoCreate(newToDo);
+    this.refs.txtToDo.value = '';
   }
 
   render(){
-    return <div><input type='text' placeholder = {this.props.text} ref='txtToDo'/><input type='button' value='新增' onClick = {this.onAdd}/></div>
+    const {text} = this.props;
+    return <div><input type='text' placeholder = {text} ref='txtToDo'/><input type='button' value='新增' onClick = {this.onAdd}/></div>
   }
 }
 
 //const ToDoHeader = ({text}) => <div><input type='text' placeholder = {text} /><input type='button' value='新增'/></div>
 
 ToDoHeader.propTypes = {
-  text:PropTypes.string
+   text:PropTypes.string
 };
 
 export default ToDoHeader;
