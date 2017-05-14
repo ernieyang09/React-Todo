@@ -6,7 +6,7 @@ import {EventEmitter} from 'events';
 const CHANGE = 'change';
 
 const _ToDoStore = {
-  ToDos:[],
+  ToDos:[{content:'123','checked':false},{content:'123','checked':false},{content:'12442','checked':true}],
   ToDoTotal:0,
   DoneCount:0
 }

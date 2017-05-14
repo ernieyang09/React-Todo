@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ToDoAction from '../actions/ToDoAction';
+import ToDoItem from '../components/ToDoItem';
 
 
 class ToDoList extends Component {
@@ -10,7 +11,9 @@ class ToDoList extends Component {
   render(){
     return(
       <ul>
-        <li>test1</li>
+        {
+          this.props.ToDoItems.map((ToDo,i)=> <ToDoItem {...ToDo} key={i}/> )
+        }
       </ul>
     )
   }

@@ -10,7 +10,7 @@ import ToDoStore from './stores/ToDoStore';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = ToDoStore.getTodos();
   }
 
   componentDidMount() {
@@ -29,8 +29,8 @@ class App extends React.Component {
     return (
       <div>
         <ToDoHeader text='請輸入代辦事項' />
-        <ToDoList/>
-        <ToDoFooter/>
+        <ToDoList ToDoItems = {this.state.ToDos}/>
+        <ToDoFooter ToDoTotal = {this.state.ToDoTotal} DoneCount = { this.state.DoneCount}/>
       </div>
     );
   }

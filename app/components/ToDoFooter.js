@@ -5,13 +5,12 @@ import ToDoAction from '../actions/ToDoAction';
 class ToDoFooter extends Component {
   constructor(props){
     super(props);
-
   }
 
   render(){
-    const {ToDoTotal,DoneCount} = this.props;
+    const { ToDoTotal,DoneCount } = this.props;
     return (
-      <div>
+       <div>
         總共 {ToDoTotal} 已完成 {DoneCount} 未完成 {ToDoTotal-DoneCount}
       </div>
     )
