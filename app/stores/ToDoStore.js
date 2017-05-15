@@ -52,12 +52,15 @@ ToDoDispatcher.register((action)=>{
 
     case ToDoConstants.TODO_UPDATE:
       let ToDo = _ToDoStore.ToDos.filter((ToDo)=> ToDo.id === props.id)[0];
-      ToDo.checked = props.checked;
       ToDo.content = props.content;
-      _ToDoStore.DoneCount = (props.checked)?_ToDoStore.DoneCount+1:_ToDoStore.DoneCount-1;
+
+      if(ToDo.checked != props.checked){
+        ToDo.checked = props.checked;
+        _ToDoStore.DoneCount = (props.checked)?_ToDoStore.DoneCount+1:_ToDoStore.DoneCount-1;
+      }
       ToDoStore.emit(CHANGE);
       break;
-      
+
     default:
       return true;
   }

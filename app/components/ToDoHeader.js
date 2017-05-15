@@ -23,8 +23,6 @@ class ToDoHeader extends Component {
   }
 }
 
-//const ToDoHeader = ({text}) => <div><input type='text' placeholder = {text} /><input type='button' value='新增'/></div>
-
 ToDoHeader.propTypes = {
    text:PropTypes.string
 };

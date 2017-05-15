@@ -9,6 +9,7 @@ class ToDoItem extends Component {
     this.toggleCheckBox = this.toggleCheckBox.bind(this);
     this.deleteToDo = this.deleteToDo.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.updateContent = this.updateContent.bind(this);
 
     this.state = {
       editMode : false
@@ -22,19 +23,30 @@ class ToDoItem extends Component {
   }
 
   toggleEditMode(){
-    this.setState({editMode:true});
+    this.setState({editMode: !this.state.editMode });
+  }
 
+  updateContent(){
+    const editText = this.refs.editText.value.trim();
+    if(editText===''){
+      alert('Error:不能為空');
+      return;
+    }
+    ToDoAction.ToDoUpdate({id: this.props.id, content: editText, checked : this.props.checked});
+    this.setState({editMode: !this.state.editMode });
   }
 
   deleteToDo() {
-    //if(confirm('確定要刪除')) {
+    if(confirm('確定要刪除')) {
       ToDoAction.ToDoDelete(this.props);
-    //}
+    }
   }
 
   renderEditMode(){
     return (
-      <div>1234</div>
+      <li>
+        <input type='text' defaultValue = {this.props.content} ref='editText' /> <input type= 'button' value = '確定' onClick={this.updateContent} /> <input type='button' value = '取消' onClick ={this.toggleEditMode}/>
+      </li>
     )
 
   }
