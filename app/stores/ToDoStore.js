@@ -5,8 +5,10 @@ import {EventEmitter} from 'events';
 
 const CHANGE = 'change';
 
+let temp_id = 0;
+
 const _ToDoStore = {
-  ToDos:[{content:'123','checked':false},{content:'123','checked':false},{content:'12442','checked':true}],
+  ToDos:[],
   ToDoTotal:0,
   DoneCount:0
 }
@@ -28,10 +30,34 @@ const ToDoStore = new ToDoStoreClass();
 
 //for action用
 ToDoDispatcher.register((action)=>{
-  switch(action.actionType){
+  const {actionType,props} = action;
+  switch(actionType){
     case ToDoConstants.TODO_CREATE:
-      _ToDoStore.ToDoCount +=1;
+      _ToDoStore.ToDoTotal +=1;
+      temp_id +=1;
+      _ToDoStore.ToDos.push({
+        id:temp_id,
+        content:props.text,
+        checked:false
+      });
+      ToDoStore.emit(CHANGE);
       break;
+
+    case ToDoConstants.TODO_DESTROY:
+      _ToDoStore.ToDos = _ToDoStore.ToDos.filter((ToDo)=> ToDo.id !== props.id);
+      _ToDoStore.ToDoTotal -= 1;
+      _ToDoStore.DoneCount = (props.checked)?_ToDoStore.DoneCount-1:_ToDoStore.DoneCount;
+      ToDoStore.emit(CHANGE);
+      break;
+
+    case ToDoConstants.TODO_UPDATE:
+      let ToDo = _ToDoStore.ToDos.filter((ToDo)=> ToDo.id === props.id)[0];
+      ToDo.checked = props.checked;
+      ToDo.content = props.content;
+      _ToDoStore.DoneCount = (props.checked)?_ToDoStore.DoneCount+1:_ToDoStore.DoneCount-1;
+      ToDoStore.emit(CHANGE);
+      break;
+      
     default:
       return true;
   }

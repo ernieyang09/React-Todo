@@ -7,25 +7,49 @@ class ToDoItem extends Component {
   constructor(props){
     super(props);
     this.toggleCheckBox = this.toggleCheckBox.bind(this);
+    this.deleteToDo = this.deleteToDo.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
+
     this.state = {
-      checked : this.props.checked,
-      content : this.props.content,
-      edit : false
+      editMode : false
     }
   }
 
+
   toggleCheckBox(){
-    this.setState({checked : !this.state.checked});
+    const checked = !this.props.checked;
+    ToDoAction.ToDoUpdate({id: this.props.id, content: this.props.content, checked : checked});
   }
 
-  render(){
+  toggleEditMode(){
+    this.setState({editMode:true});
+
+  }
+
+  deleteToDo() {
+    //if(confirm('確定要刪除')) {
+      ToDoAction.ToDoDelete(this.props);
+    //}
+  }
+
+  renderEditMode(){
+    return (
+      <div>1234</div>
+    )
+
+  }
+
+  renderViewMode(){
     return (
       <li>
-        <input type='checkbox' checked = {this.state.checked} onChange = {this.toggleCheckBox}/> {this.state.content} <input type='button' value='刪除'/>
+        <label><input type='checkbox' checked = {this.props.checked} onChange = {this.toggleCheckBox}/> {this.props.content}</label> <input type='button' value='修改' onClick = {this.toggleEditMode}/> <input type='button' value='刪除' onClick = {this.deleteToDo}/>
       </li>
 
     )
+  }
 
+  render(){
+    return (!this.state.editMode)?this.renderViewMode():this.renderEditMode();
   }
 }
 

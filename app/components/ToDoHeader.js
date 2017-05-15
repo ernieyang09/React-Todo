@@ -9,8 +9,10 @@ class ToDoHeader extends Component {
   }
 
 
-  onAdd(){
+  onAdd (){
     let newToDo = this.refs.txtToDo.value.trim();
+    if(newToDo==='')
+      return;
     ToDoAction.ToDoCreate(newToDo);
     this.refs.txtToDo.value = '';
   }

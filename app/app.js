@@ -11,6 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = ToDoStore.getTodos();
+    this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
