@@ -11,9 +11,6 @@ class ToDoItem extends Component {
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.updateContent = this.updateContent.bind(this);
 
-    this.state = {
-      editMode : false
-    }
   }
 
 
@@ -23,7 +20,7 @@ class ToDoItem extends Component {
   }
 
   toggleEditMode(){
-    this.setState({editMode: !this.state.editMode });
+    ToDoAction.ToDoToggleEdit({id: this.props.id, edit:!this.props.edit});
   }
 
   updateContent(){
@@ -33,7 +30,6 @@ class ToDoItem extends Component {
       return;
     }
     ToDoAction.ToDoUpdate({id: this.props.id, content: editText, checked : this.props.checked});
-    this.setState({editMode: !this.state.editMode });
   }
 
   deleteToDo() {
@@ -61,7 +57,7 @@ class ToDoItem extends Component {
   }
 
   render(){
-    return (!this.state.editMode)?this.renderViewMode():this.renderEditMode();
+    return (!this.props.edit)?this.renderViewMode():this.renderEditMode();
   }
 }
 

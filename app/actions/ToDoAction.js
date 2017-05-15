@@ -19,6 +19,12 @@ const ToDoAction = {
       actionType:ToDoConstants.TODO_UPDATE,
       props:{id: props.id,content:props.content,checked:props.checked}
     });
+  },
+  ToDoToggleEdit:(props) =>{
+    ToDoDispatcher.dispatch({
+      actionType:ToDoConstants.TODO_TOGGLEEDIT,
+      props:{id: props.id,edit: props.edit}
+    });
 
   }
 }

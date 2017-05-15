@@ -33,24 +33,30 @@ ToDoDispatcher.register((action)=>{
   const {actionType,props} = action;
   switch(actionType){
     case ToDoConstants.TODO_CREATE:
+    {
       _ToDoStore.ToDoTotal +=1;
       temp_id +=1;
       _ToDoStore.ToDos.push({
         id:temp_id,
         content:props.text,
-        checked:false
+        checked:false,
+        edit:false
       });
       ToDoStore.emit(CHANGE);
+    }
       break;
 
     case ToDoConstants.TODO_DESTROY:
+    {
       _ToDoStore.ToDos = _ToDoStore.ToDos.filter((ToDo)=> ToDo.id !== props.id);
       _ToDoStore.ToDoTotal -= 1;
       _ToDoStore.DoneCount = (props.checked)?_ToDoStore.DoneCount-1:_ToDoStore.DoneCount;
       ToDoStore.emit(CHANGE);
+    }
       break;
 
     case ToDoConstants.TODO_UPDATE:
+    {
       let ToDo = _ToDoStore.ToDos.filter((ToDo)=> ToDo.id === props.id)[0];
       ToDo.content = props.content;
 
@@ -58,9 +64,19 @@ ToDoDispatcher.register((action)=>{
         ToDo.checked = props.checked;
         _ToDoStore.DoneCount = (props.checked)?_ToDoStore.DoneCount+1:_ToDoStore.DoneCount-1;
       }
-      ToDoStore.emit(CHANGE);
-      break;
 
+      ToDo.edit = false;
+
+      ToDoStore.emit(CHANGE);
+    }
+      break;
+    case ToDoConstants.TODO_TOGGLEEDIT:
+    {
+      let ToDo = _ToDoStore.ToDos.filter((ToDo)=> ToDo.id === props.id)[0];
+      ToDo.edit = props.edit;
+      ToDoStore.emit(CHANGE);
+    }
+      break;
     default:
       return true;
   }
