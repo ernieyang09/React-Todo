@@ -78,6 +78,30 @@ ToDoDispatcher.register((action)=>{
       ToDoStore.emit(CHANGE);
     }
       break;
+    case ToDoConstants.TODO_IMPORT:
+    {
+      let filereader =  new FileReader();
+
+      new Promise((resolve,reject)=>{
+         filereader.onloadend = e => {
+            resolve(e.srcElement.result);
+         }
+         filereader.readAsText(props.file);
+      }).then((text) => {
+         const JsonArr = JSON.parse(text);
+         JsonArr.forEach((ToDo)=>{
+           _ToDoStore.ToDoTotal +=1;
+           temp_id+=1;
+           ToDo.id = temp_id;
+           if(ToDo.checked){
+             _ToDoStore.DoneCount+=1;
+           }
+           _ToDoStore.ToDos.push(ToDo);
+         });
+         ToDoStore.emit(CHANGE);
+      });
+    }
+      break;
     case ToDoConstants.TODO_EXPORT:
     {
       const Json = JSON.stringify(_ToDoStore.ToDos);

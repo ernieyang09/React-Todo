@@ -30,6 +30,12 @@ const ToDoAction = {
     ToDoDispatcher.dispatch({
       actionType:ToDoConstants.TODO_EXPORT
     });
+  },
+  ToDoImport:(props) =>{
+    ToDoDispatcher.dispatch({
+      actionType:ToDoConstants.TODO_IMPORT,
+      props:{file:props.file}
+    });
   }
 }
 
