@@ -2,6 +2,7 @@ import ToDoDispatcher from '../dispatcher/ToDoDispatcher';
 import ToDoAction from '../actions/ToDoAction';
 import ToDoConstants from '../constants/ToDoConstants';
 import {EventEmitter} from 'events';
+import FileSaver from 'file-saver';
 
 const CHANGE = 'change';
 
@@ -77,6 +78,11 @@ ToDoDispatcher.register((action)=>{
       ToDoStore.emit(CHANGE);
     }
       break;
+    case ToDoConstants.TODO_EXPORT:
+    {
+      const Json = JSON.stringify(_ToDoStore.ToDos);
+      FileSaver.saveAs(new Blob([Json],{type:'text/plain;charset=utf-8;'}),'export.json');
+    }
     default:
       return true;
   }

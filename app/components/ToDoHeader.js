@@ -4,6 +4,7 @@ import ToDoAction from '../actions/ToDoAction';
 
 const ToDoHeader = (props) =>{
    let txtToDo;
+   let importFileNode;
    const onAdd = () => {
        let newToDo = txtToDo.value.trim();
        if(newToDo==='')
@@ -12,7 +13,23 @@ const ToDoHeader = (props) =>{
        txtToDo.value = '';
    }
 
-   return (<div><input type='text' placeholder = {props.text} ref={node => txtToDo = node }/><input type='button' value='新增' onClick = {onAdd}/></div>)
+   const importFile = () => {
+      importFileNode.click();
+   }
+
+   const exportFile = () => {
+       const JSON = ToDoAction.ToDoExport();
+       console.log(JSON)
+
+   }
+
+   return (<div>
+             <input type='text' placeholder = {props.text} ref={node => txtToDo = node }/>
+             <input type='button' value='新增' onClick = {onAdd}/>
+             <input type='file' ref={node => importFileNode = node}/>
+             <input type='button' value='匯入' onClick = {importFile}/>
+             <input type='button' value='匯出' onClick = {exportFile}/>
+           </div>)
 
 };
 
