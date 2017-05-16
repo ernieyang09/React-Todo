@@ -19,20 +19,26 @@ module.exports = {
     modules:['node_modules'],
   },
   module:{
-    loaders:[
-      {
-        loader:'babel-loader',
-        test: /\.js$/,
-        include: path.resolve(__dirname, 'app')
-      },
-      {
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        }),
-        test: /\.css$/,
-        include: path.resolve(__dirname, 'app/assets')
-      }
+    rules: [
+            {
+                test: /\.js[x]?$/,
+                enforce: 'pre',
+                include: path.resolve(__dirname, 'app'),
+                loader: 'eslint-loader'
+            },
+            {
+              loader:'babel-loader',
+              test: /\.js$/,
+              include: path.resolve(__dirname, 'app')
+            },
+            {
+              loader: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: 'css-loader'
+              }),
+              test: /\.css$/,
+              include: path.resolve(__dirname, 'app/assets')
+            }
     ]
   },
   devServer:{

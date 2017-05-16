@@ -1,11 +1,14 @@
-require('./assets/style/style.css');
+import './assets/style/style.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Perf from 'react-addons-perf';
 import ToDoHeader from './components/ToDoHeader';
 import ToDoList from './components/ToDoList';
 import ToDoFooter from './components/ToDoFooter';
 import ToDoStore from './stores/ToDoStore';
+
+window.Perf = Perf;
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +22,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    TodoStore.removeChangeListener(this._onChange);
+    ToDoStore.removeChangeListener(this._onChange);
   }
 
   _onChange() {
