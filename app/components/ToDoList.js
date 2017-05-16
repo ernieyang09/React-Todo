@@ -7,7 +7,7 @@ const ToDoList = (props) =>{
         return(
         <ul>
           {
-            props.ToDoItems.map((ToDo,index)=> <ToDoItem  key={index} {...ToDo}/> )
+            props.ToDoItems.map((ToDo,index)=> <ToDoItem  key={ToDo.id} {...ToDo}/> )
           }
         </ul>
         )
