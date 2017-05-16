@@ -26,11 +26,12 @@ module.exports = {
         include: path.resolve(__dirname, 'app')
       },
       {
-        test: /\.css$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader'
-        })
+        }),
+        test: /\.css$/,
+        include: path.resolve(__dirname, 'app/assets')
       }
     ]
   },

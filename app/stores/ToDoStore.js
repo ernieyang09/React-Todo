@@ -90,13 +90,15 @@ ToDoDispatcher.register((action)=>{
       }).then((text) => {
          const JsonArr = JSON.parse(text);
          JsonArr.forEach((ToDo)=>{
-           _ToDoStore.ToDoTotal +=1;
            temp_id+=1;
            ToDo.id = temp_id;
+           ToDo.edit = false;
            if(ToDo.checked){
              _ToDoStore.DoneCount+=1;
            }
+           _ToDoStore.ToDoTotal +=1;
            _ToDoStore.ToDos.push(ToDo);
+
          });
          ToDoStore.emit(CHANGE);
       });
@@ -104,6 +106,10 @@ ToDoDispatcher.register((action)=>{
       break;
     case ToDoConstants.TODO_EXPORT:
     {
+      const ToDos = _ToDoStore.ToDos;
+      ToDos.forEach((ToDo)=>{
+        delete ToDo.edit;
+      });
       const Json = JSON.stringify(_ToDoStore.ToDos);
       FileSaver.saveAs(new Blob([Json],{type:'text/plain;charset=utf-8;'}),'export.json');
     }

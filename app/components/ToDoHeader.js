@@ -32,7 +32,7 @@ const ToDoHeader = (props) =>{
    return (<div>
              <input type='text' placeholder = {props.text} ref={node => txtToDo = node }/>
              <input type='button' value='新增' onClick = {onAdd}/>
-             <input type='file' ref={node => importFileNode = node} onChange ={importHandler} multiple={false} accept='.json'/>
+             <input id='File' type='file' ref={node => importFileNode = node} onChange ={importHandler} multiple={false} accept='.json'/>
              <input type='button' value='匯入' onClick = {importFileClick}/>
              <input type='button' value='匯出' onClick = {exportFile}/>
            </div>)
