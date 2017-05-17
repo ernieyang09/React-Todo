@@ -85,7 +85,7 @@ ToDoDispatcher.register((action)=>{
          filereader.onloadend = e => {
             resolve(e.srcElement.result);
          }
-         filereader.error = e => {
+         filereader.onerror = e => {
            reject(e);
          }
          filereader.readAsText(props.file);

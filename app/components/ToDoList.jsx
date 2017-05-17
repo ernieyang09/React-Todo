@@ -7,18 +7,18 @@ const ToDoList = (props) =>{
     return(
         <ul>
             {
-            props.ToDoItems.map((ToDo)=>
-                (ToDo.edit)?
-                    <ToDoEditItem
-                        key={ToDo.id}
-                        {...ToDo}
-                    />
-                 :
-                    <ToDoViewItem
-                        key={ToDo.id}
-                        {...ToDo}
-                    />
-            )
+                props.ToDoItems.map((ToDo)=>
+                    (ToDo.edit)?
+                        <ToDoEditItem
+                            key={ToDo.id}
+                            {...ToDo}
+                        />
+                    :
+                        <ToDoViewItem
+                            key={ToDo.id}
+                            {...ToDo}
+                        />
+                )
             }
         </ul>
     )
