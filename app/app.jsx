@@ -3,9 +3,9 @@ import './assets/style/style.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Perf from 'react-addons-perf';
-import ToDoHeader from './components/ToDoHeader';
-import ToDoList from './components/ToDoList';
-import ToDoFooter from './components/ToDoFooter';
+import ToDoHeader from './components/ToDoHeader.jsx';
+import ToDoList from './components/ToDoList.jsx';
+import ToDoFooter from './components/ToDoFooter.jsx';
 import ToDoStore from './stores/ToDoStore';
 
 window.Perf = Perf;
@@ -21,6 +21,11 @@ class App extends React.Component {
     ToDoStore.addChangeListener(this._onChange);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps, nextState);
+    return true;
+  }
+
   componentWillUnmount() {
     ToDoStore.removeChangeListener(this._onChange);
   }
@@ -31,13 +36,16 @@ class App extends React.Component {
 
   render(){
     return (
-      <div>
-        <ToDoHeader text='請輸入代辦事項' />
-        <ToDoList ToDoItems = {this.state.ToDos}/>
-        <ToDoFooter ToDoTotal = {this.state.ToDoTotal} DoneCount = { this.state.DoneCount}/>
-      </div>
+        <div>
+            <ToDoHeader text='請輸入代辦事項' />
+            <ToDoList ToDoItems={this.state.ToDos} />
+            <ToDoFooter
+                DoneCount={this.state.DoneCount}
+                ToDoTotal={this.state.ToDoTotal}
+            />
+        </div>
     );
   }
 }
 
-ReactDOM.render(<App/>,document.getElementById('App'));
+ReactDOM.render(<App />,document.getElementById('App'));

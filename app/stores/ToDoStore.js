@@ -1,5 +1,4 @@
 import ToDoDispatcher from '../dispatcher/ToDoDispatcher';
-import ToDoAction from '../actions/ToDoAction';
 import ToDoConstants from '../constants/ToDoConstants';
 import {EventEmitter} from 'events';
 import FileSaver from 'file-saver';
@@ -86,7 +85,12 @@ ToDoDispatcher.register((action)=>{
          filereader.onloadend = e => {
             resolve(e.srcElement.result);
          }
+         filereader.error = e => {
+           reject(e);
+         }
          filereader.readAsText(props.file);
+
+
       }).then((text) => {
          const JsonArr = JSON.parse(text);
          JsonArr.forEach((ToDo)=>{
@@ -113,6 +117,7 @@ ToDoDispatcher.register((action)=>{
       const Json = JSON.stringify(_ToDoStore.ToDos);
       FileSaver.saveAs(new Blob([Json],{type:'text/plain;charset=utf-8;'}),'export.json');
     }
+    break;
     default:
       return true;
   }

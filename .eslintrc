@@ -10,7 +10,20 @@
   },
   "env": {
     "es6": true,
-    "browser": true
+    "browser": true,
+    "node": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"]
+  "rules": {
+      "no-console": 0,
+      "react/no-set-state": 0,
+      "react/jsx-no-bind": [1, {
+        "ignoreRefs": true,
+        "allowArrowFunctions": false,
+        "allowBind": false
+      }],
+      "react/jsx-wrap-multilines": [1,{
+        "arrow": false
+      }]
+  },
+  "extends": ["eslint:recommended", "plugin:react/all"]
 }

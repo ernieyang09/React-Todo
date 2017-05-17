@@ -10,13 +10,13 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: ['./app/app.js'],
+  entry: ['./app/app.jsx'],
   output:{
     path: path.resolve(__dirname,'build'),
     filename: 'bundle.js'
   },
   resolve:{
-    modules:['node_modules'],
+    modules:['node_modules']
   },
   module:{
     rules: [
@@ -28,7 +28,7 @@ module.exports = {
             },
             {
               loader:'babel-loader',
-              test: /\.js$/,
+              test: /\.js[x]$/,
               include: path.resolve(__dirname, 'app')
             },
             {
