@@ -14,6 +14,12 @@ const ToDoAction = {
       props:{id: props.id,checked:props.checked}
     });
   },
+  ToDoDraft: (props) =>{
+    ToDoDispatcher.dispatch({
+      actionType:ToDoConstants.TODO_DRAFT,
+      props:{text:props.text}
+    });
+  },
   ToDoUpdate: (props) => {
     ToDoDispatcher.dispatch({
       actionType:ToDoConstants.TODO_UPDATE,

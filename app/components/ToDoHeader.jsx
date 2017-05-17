@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button,Input } from 'material-components';
 
 const ToDoHeader = (props) =>{
    let txtToDo;
    let importFileNode;
    const onAdd = () => {
-       let newToDo = txtToDo.value.trim();
+       let newToDo = txtToDo.props.value.trim();
        if(newToDo==='')
          return;
        props.onAdd(newToDo);
-       txtToDo.value = '';
+       txtToDo.props.value = '';
+   }
+
+   const typeHandler = (e) => {
+      props.onDraft({text:e.target.value});
    }
 
    const importFileClick = () => {
@@ -26,16 +31,17 @@ const ToDoHeader = (props) =>{
    }
 
    return (<div>
-       <input
-           placeholder={props.text}
+       <Input
+           label={props.text}
+           onChange={typeHandler}
            ref={node => txtToDo = node}
-           type='text'
+           value={props.Draft}
        />
-       <input
-           onClick={onAdd}
+       <Button
+           flat
+           onTouchTap={onAdd}
            type='button'
-           value='新增'
-       />
+       >{'新增'}</Button>
        <input
            accept='.json'
            id='File'
@@ -44,21 +50,22 @@ const ToDoHeader = (props) =>{
            ref={node => importFileNode = node}
            type='file'
        />
-       <input
-           onClick={importFileClick}
+       <Button
+           flat
+           onTouchTap={importFileClick}
            type='button'
-           value='匯入'
-       />
-       <input
-           onClick={exportFile}
+       >{'匯入'}</Button>
+       <Button
+           flat
+           onTouchTap={exportFile}
            type='button'
-           value='匯出'
-       />
+       >{'匯出'}</Button>
    </div>)
 
 };
 
 ToDoHeader.propTypes = {
+   Draft:PropTypes.string.isRequired,
    onExport:PropTypes.func.isRequired,
    text:PropTypes.string
 };

@@ -36,8 +36,7 @@ module.exports = {
                 fallback: 'style-loader',
                 use: 'css-loader'
               }),
-              test: /\.css$/,
-              include: path.resolve(__dirname, 'app/assets')
+              test: /\.css$/
             }
     ]
   },

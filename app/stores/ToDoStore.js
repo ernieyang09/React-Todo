@@ -10,7 +10,8 @@ let temp_id = 0;
 const _ToDoStore = {
   ToDos:[],
   ToDoTotal:0,
-  DoneCount:0
+  DoneCount:0,
+  DraftWord:''
 }
 
 //state change用
@@ -42,6 +43,7 @@ ToDoDispatcher.register((action)=>{
         checked:false,
         edit:false
       });
+      _ToDoStore.DraftWord = '';
       ToDoStore.emit(CHANGE);
     }
       break;
@@ -53,6 +55,13 @@ ToDoDispatcher.register((action)=>{
       _ToDoStore.DoneCount = (props.checked)?_ToDoStore.DoneCount-1:_ToDoStore.DoneCount;
       ToDoStore.emit(CHANGE);
     }
+      break;
+
+    case ToDoConstants.TODO_DRAFT:
+    {
+      _ToDoStore.DraftWord = props.text
+    }
+    ToDoStore.emit(CHANGE);
       break;
 
     case ToDoConstants.TODO_UPDATE:
