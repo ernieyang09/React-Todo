@@ -2,13 +2,25 @@ import './assets/style/style.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Perf from 'react-addons-perf';
 import ToDoHeader from './components/ToDoHeader.jsx';
 import ToDoList from './components/ToDoList.jsx';
 import ToDoFooter from './components/ToDoFooter.jsx';
+import ToDoAction from './actions/ToDoAction';
 import ToDoStore from './stores/ToDoStore';
 
 window.Perf = Perf;
+
+const AppProps = {
+  _onAdd:ToDoAction.ToDoCreate,
+  _onDelete:ToDoAction.ToDoDelete,
+  _onUpdate:ToDoAction.ToDoUpdate,
+  _onToggleEdit:ToDoAction.ToDoToggleEdit,
+  _onImport:ToDoAction.ToDoImport,
+  _onExport:ToDoAction.ToDoExport
+
+}
 
 class App extends React.Component {
   constructor(props) {
@@ -22,7 +34,7 @@ class App extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps, nextState);
+    //console.log(nextProps, nextState);
     return true;
   }
 
@@ -34,11 +46,24 @@ class App extends React.Component {
     this.setState(ToDoStore.getTodos());
   }
 
+
+
   render(){
+    const {_onAdd,_onDelete,_onUpdate,_onToggleEdit,_onImport,_onExport}=this.props;
     return (
         <div>
-            <ToDoHeader text='請輸入代辦事項' />
-            <ToDoList ToDoItems={this.state.ToDos} />
+            <ToDoHeader
+                onAdd={_onAdd}
+                onExport={_onExport}
+                onImport={_onImport}
+                text='請輸入代辦事項'
+            />
+            <ToDoList
+                ToDoItems={this.state.ToDos}
+                onDelete={_onDelete}
+                onToggleEdit={_onToggleEdit}
+                onUpdate={_onUpdate}
+            />
             <ToDoFooter
                 DoneCount={this.state.DoneCount}
                 ToDoTotal={this.state.ToDoTotal}
@@ -48,4 +73,14 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />,document.getElementById('App'));
+App.propTypes = {
+   _onAdd:PropTypes.func.isRequired,
+   _onDelete:PropTypes.func.isRequired,
+   _onExport:PropTypes.func.isRequired,
+   _onImport:PropTypes.func.isRequired,
+   _onToggleEdit:PropTypes.func.isRequired,
+   _onUpdate:PropTypes.func.isRequired
+};
+
+
+ReactDOM.render(<App {...AppProps} />,document.getElementById('App'));

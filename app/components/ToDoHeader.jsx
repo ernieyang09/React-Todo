@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ToDoAction from '../actions/ToDoAction';
 
 const ToDoHeader = (props) =>{
    let txtToDo;
@@ -9,7 +8,7 @@ const ToDoHeader = (props) =>{
        let newToDo = txtToDo.value.trim();
        if(newToDo==='')
          return;
-       ToDoAction.ToDoCreate(newToDo);
+       props.onAdd(newToDo);
        txtToDo.value = '';
    }
 
@@ -18,15 +17,12 @@ const ToDoHeader = (props) =>{
    }
 
    const importHandler = () => {
-
-      ToDoAction.ToDoImport({file:importFileNode.files[0]});
+      props.onImport({file:importFileNode.files[0]});
       importFileNode.value='';
-
-
    }
 
    const exportFile = () => {
-      ToDoAction.ToDoExport();
+      props.onExport();
    }
 
    return (<div>
@@ -63,6 +59,7 @@ const ToDoHeader = (props) =>{
 };
 
 ToDoHeader.propTypes = {
+   onExport:PropTypes.func.isRequired,
    text:PropTypes.string
 };
 

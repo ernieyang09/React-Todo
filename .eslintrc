@@ -23,7 +23,8 @@
       }],
       "react/jsx-wrap-multilines": [1,{
         "arrow": false
-      }]
+      }],
+      no-unused-vars: 1
   },
   "extends": ["eslint:recommended", "plugin:react/all"]
 }

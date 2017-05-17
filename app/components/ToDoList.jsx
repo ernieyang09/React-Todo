@@ -11,11 +11,15 @@ const ToDoList = (props) =>{
                     (ToDo.edit)?
                         <ToDoEditItem
                             key={ToDo.id}
+                            onToggleEdit={props.onToggleEdit}
+                            onUpdate={props.onUpdate}
                             {...ToDo}
                         />
                     :
                         <ToDoViewItem
                             key={ToDo.id}
+                            onDelete={props.onDelete}
+                            onUpdate={props.onUpdate}
                             {...ToDo}
                         />
                 )
@@ -30,7 +34,8 @@ ToDoList.propTypes = {
         content:PropTypes.string.isRequired,
         edit:PropTypes.bool.isRequired,
         checked:PropTypes.bool.isRequired
-    }))
+    })),
+    onUpdate : PropTypes.func.isRequired
 }
 
 ToDoList.defaultProps = {

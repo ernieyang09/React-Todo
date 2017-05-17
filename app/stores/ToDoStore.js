@@ -102,7 +102,6 @@ ToDoDispatcher.register((action)=>{
            }
            _ToDoStore.ToDoTotal +=1;
            _ToDoStore.ToDos.push(ToDo);
-
          });
          ToDoStore.emit(CHANGE);
       });
