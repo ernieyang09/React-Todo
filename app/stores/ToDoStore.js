@@ -11,7 +11,10 @@ const _ToDoStore = {
   ToDos:[],
   ToDoTotal:0,
   DoneCount:0,
-  DraftWord:''
+  AddDraftWord:'',
+  edit:null,
+  editDraft:'',
+  showMode:'All'
 }
 
 //state change用
@@ -43,7 +46,9 @@ ToDoDispatcher.register((action)=>{
         checked:false,
         edit:false
       });
-      _ToDoStore.DraftWord = '';
+      _ToDoStore.AddDraftWord = '';
+      _ToDoStore.edit = null;
+      _ToDoStore.editDraft='';
       ToDoStore.emit(CHANGE);
     }
       break;
@@ -57,9 +62,16 @@ ToDoDispatcher.register((action)=>{
     }
       break;
 
-    case ToDoConstants.TODO_DRAFT:
+    case ToDoConstants.TODO_ADDDRAFT:
     {
-      _ToDoStore.DraftWord = props.text
+      _ToDoStore.AddDraftWord = props.text
+    }
+    ToDoStore.emit(CHANGE);
+      break;
+
+    case ToDoConstants.TODO_EDITDRAFT:
+    {
+      _ToDoStore.editDraft = props.text;
     }
     ToDoStore.emit(CHANGE);
       break;
@@ -74,15 +86,23 @@ ToDoDispatcher.register((action)=>{
         _ToDoStore.DoneCount = (props.checked)?_ToDoStore.DoneCount+1:_ToDoStore.DoneCount-1;
       }
 
-      ToDo.edit = false;
+      _ToDoStore.edit = null;
+      _ToDoStore.editDraft='';
 
       ToDoStore.emit(CHANGE);
     }
       break;
     case ToDoConstants.TODO_TOGGLEEDIT:
     {
-      let ToDo = _ToDoStore.ToDos.filter((ToDo)=> ToDo.id === props.id)[0];
-      ToDo.edit = props.edit;
+
+      if(props.id===_ToDoStore.edit){
+        _ToDoStore.edit=null;
+        _ToDoStore.editDraft='';
+      }else{
+        let ToDo = _ToDoStore.ToDos.filter((ToDo)=> ToDo.id === props.id)[0];
+        _ToDoStore.edit = props.id;
+        _ToDoStore.editDraft = ToDo.content;
+      }
       ToDoStore.emit(CHANGE);
     }
       break;
@@ -118,14 +138,18 @@ ToDoDispatcher.register((action)=>{
       break;
     case ToDoConstants.TODO_EXPORT:
     {
-      const ToDos = _ToDoStore.ToDos;
-      ToDos.forEach((ToDo)=>{
-        delete ToDo.edit;
-      });
       const Json = JSON.stringify(_ToDoStore.ToDos);
       FileSaver.saveAs(new Blob([Json],{type:'text/plain;charset=utf-8;'}),'export.json');
     }
     break;
+    case ToDoConstants.TODO_TOGGLESHOW:
+    {
+      _ToDoStore.showMode = props.mode;
+      _ToDoStore.edit = null;
+      _ToDoStore.editDraft='';
+    }
+      ToDoStore.emit(CHANGE);
+      break;
     default:
       return true;
   }

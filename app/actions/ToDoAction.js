@@ -14,11 +14,18 @@ const ToDoAction = {
       props:{id: props.id,checked:props.checked}
     });
   },
-  ToDoDraft: (props) =>{
+  ToDoAddDraft: (props) =>{
     ToDoDispatcher.dispatch({
-      actionType:ToDoConstants.TODO_DRAFT,
+      actionType:ToDoConstants.TODO_ADDDRAFT,
       props:{text:props.text}
     });
+  },
+  ToDOEditDraft: (props) =>{
+    ToDoDispatcher.dispatch({
+      actionType:ToDoConstants.TODO_EDITDRAFT,
+      props:{text:props.text}
+    });
+
   },
   ToDoUpdate: (props) => {
     ToDoDispatcher.dispatch({
@@ -29,7 +36,7 @@ const ToDoAction = {
   ToDoToggleEdit:(props) =>{
     ToDoDispatcher.dispatch({
       actionType:ToDoConstants.TODO_TOGGLEEDIT,
-      props:{id: props.id,edit: props.edit}
+      props:{id: props.id}
     });
   },
   ToDoExport:() =>{
@@ -41,6 +48,12 @@ const ToDoAction = {
     ToDoDispatcher.dispatch({
       actionType:ToDoConstants.TODO_IMPORT,
       props:{file:props.file}
+    });
+  },
+  ToDoToggleShow:(props)=>{
+    ToDoDispatcher.dispatch({
+      actionType:ToDoConstants.TODO_TOGGLESHOW,
+      props:{mode:props.mode}
     });
   }
 }

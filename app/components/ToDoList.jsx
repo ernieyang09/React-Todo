@@ -4,13 +4,28 @@ import ToDoViewItem from '../components/ToDoViewItem.jsx';
 import ToDoEditItem from '../components/ToDoEditItem.jsx';
 
 const ToDoList = (props) =>{
+    const showToDos = props.ToDoItems.filter((ToDo)=>{
+        switch(props.Mode){
+            case 'All':
+                return true;
+            case 'Done':
+                return ToDo.checked===true;
+            case 'unDone':
+                return ToDo.checked===false;
+            default:
+                return true;
+        }
+    });
+    
     return(
         <ul>
             {
-                props.ToDoItems.map((ToDo)=>
-                    (ToDo.edit)?
+                showToDos.map((ToDo)=>
+                    (props.DraftID===ToDo.id)?
                         <ToDoEditItem
+                            EditDraft={props.EditDraft}
                             key={ToDo.id}
+                            onEdit={props.onEdit}
                             onToggleEdit={props.onToggleEdit}
                             onUpdate={props.onUpdate}
                             {...ToDo}

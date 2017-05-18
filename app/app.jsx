@@ -18,11 +18,13 @@ window.Perf = Perf;
 const AppProps = {
   _onAdd:ToDoAction.ToDoCreate,
   _onDelete:ToDoAction.ToDoDelete,
-  _onDraft:ToDoAction.ToDoDraft,
+  _onAddDraft:ToDoAction.ToDoAddDraft,
+  _onEditDraft:ToDoAction.ToDOEditDraft,
   _onUpdate:ToDoAction.ToDoUpdate,
   _onToggleEdit:ToDoAction.ToDoToggleEdit,
   _onImport:ToDoAction.ToDoImport,
-  _onExport:ToDoAction.ToDoExport
+  _onExport:ToDoAction.ToDoExport,
+  _onToggleShow:ToDoAction.ToDoToggleShow
 
 }
 
@@ -72,26 +74,32 @@ class App extends React.Component {
 
 
   render(){
-    const {_onAdd,_onDelete,_onDraft,_onUpdate,_onToggleEdit,_onImport,_onExport}=this.props;
+    const {_onAdd,_onDelete,_onAddDraft,_onEditDraft,_onUpdate,_onToggleEdit,_onImport,_onExport,_onToggleShow}=this.props;
     return (
         <div>
             <ToDoHeader
-                Draft={this.state.DraftWord}
+                Draft={this.state.AddDraftWord}
                 onAdd={_onAdd}
-                onDraft={_onDraft}
+                onDraft={_onAddDraft}
                 onExport={_onExport}
                 onImport={_onImport}
                 text='請輸入代辦事項'
             />
             <ToDoList
+                DraftID={this.state.edit}
+                EditDraft={this.state.editDraft}
+                Mode={this.state.showMode}
                 ToDoItems={this.state.ToDos}
                 onDelete={_onDelete}
+                onEdit={_onEditDraft}
                 onToggleEdit={_onToggleEdit}
                 onUpdate={_onUpdate}
             />
             <ToDoFooter
                 DoneCount={this.state.DoneCount}
+                Mode={this.state.showMode}
                 ToDoTotal={this.state.ToDoTotal}
+                onToggleShow={_onToggleShow}
             />
         </div>
     );
@@ -100,11 +108,13 @@ class App extends React.Component {
 
 App.propTypes = {
    _onAdd:PropTypes.func.isRequired,
+   _onAddDraft:PropTypes.func.isRequired,
    _onDelete:PropTypes.func.isRequired,
-   _onDraft:PropTypes.func.isRequired,
+   _onEditDraft:PropTypes.func.isRequired,
    _onExport:PropTypes.func.isRequired,
    _onImport:PropTypes.func.isRequired,
    _onToggleEdit:PropTypes.func.isRequired,
+   _onToggleShow:PropTypes.func.isRequired,
    _onUpdate:PropTypes.func.isRequired
 };
 

@@ -25,7 +25,8 @@
       "react/jsx-wrap-multilines": [1,{
         "arrow": false
       }],
-      no-unused-vars: 1
+      "no-unused-vars": 1,
+      "react/forbid-component-props": 0
   },
   "extends": ["eslint:recommended", "plugin:react/all"]
 }

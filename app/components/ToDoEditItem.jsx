@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ToDoAction from '../actions/ToDoAction';
-
+import { Button,Input } from 'material-components';
 
 const ToDoEditItem =(props)=>{
   let editNode;
@@ -10,8 +10,12 @@ const ToDoEditItem =(props)=>{
     ToDoAction.ToDoToggleEdit({id: props.id, edit:!props.edit});
   }
 
+  const typeHandler = (e) => {
+    ToDoAction.ToDOEditDraft({id:props.id,text:e.target.value});
+  }
+
   const updateContent = () => {
-    const editText = editNode.value.trim();
+    const editText = editNode.props.value.trim();
     if(editText===''){
       alert('Error:不能為空');
       return;
@@ -21,36 +25,34 @@ const ToDoEditItem =(props)=>{
 
   return (
       <li>
-          <input
-              defaultValue={props.content}
+          <Input
+              onChange={typeHandler}
               ref={node => editNode = node}
-              type='text'
+              style={{'width':'200px'}}
+              value={props.EditDraft}
           />
-          <input
-              onClick={updateContent}
-              type='button'
-              value='確定'
-
-          />
-          <input
-              onClick={toggleEditMode}
-              type='button'
-              value='取消'
-          />
+          <Button
+              flat
+              onTouchTap={updateContent}
+          >{'確定'}</Button>
+          <Button
+              flat
+              onTouchTap={toggleEditMode}
+          >{'取消'}</Button>
       </li>
   )
 }
 
 
 ToDoEditItem.propTypes={
+  EditDraft:PropTypes.string,
   checked:PropTypes.bool,
-  content:PropTypes.string,
   id:PropTypes.number.isRequired
 }
 
 ToDoEditItem.defaultProps={
   checked:false,
-  content:''
+  EditDraft:''
 }
 
 export default ToDoEditItem;

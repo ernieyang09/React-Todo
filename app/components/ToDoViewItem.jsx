@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ToDoAction from '../actions/ToDoAction';
+import { Button,Checkbox } from 'material-components';
 
 const ToDoViewItem = (props) => {
 
   const toggleEditMode = () => {
-    ToDoAction.ToDoToggleEdit({id: props.id, edit:!props.edit});
+    ToDoAction.ToDoToggleEdit({id: props.id});
   }
 
   const toggleCheckBox = () => {
@@ -21,24 +22,20 @@ const ToDoViewItem = (props) => {
 
   return (
       <li>
-          <label>
-              <input
-                  checked={props.checked}
-                  onChange={toggleCheckBox}
-                  type='checkbox'
-              />
-              {props.content}
-          </label>
-          <input
-              onClick={toggleEditMode}
-              type='button'
-              value='修改'
+          <Checkbox
+              label={props.content}
+              onChange={toggleCheckBox}
+              style={{'verticalAlign':'middle','width':'200px','textOverflow':'ellipsis','overflow':'hidden','whiteSpace':'nowrap'}}
+              value={props.checked}
           />
-          <input
-              onClick={deleteToDo}
-              type='button'
-              value='刪除'
-          />
+          <Button
+              flat
+              onTouchTap={toggleEditMode}
+          >{'修改'}</Button>
+          <Button
+              flat
+              onTouchTap={deleteToDo}
+          >{'刪除'}</Button>
       </li>
 
   )

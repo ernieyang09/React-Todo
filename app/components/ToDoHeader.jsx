@@ -10,7 +10,6 @@ const ToDoHeader = (props) =>{
        if(newToDo==='')
          return;
        props.onAdd(newToDo);
-       txtToDo.props.value = '';
    }
 
    const typeHandler = (e) => {
@@ -40,7 +39,6 @@ const ToDoHeader = (props) =>{
        <Button
            flat
            onTouchTap={onAdd}
-           type='button'
        >{'新增'}</Button>
        <input
            accept='.json'
@@ -53,12 +51,10 @@ const ToDoHeader = (props) =>{
        <Button
            flat
            onTouchTap={importFileClick}
-           type='button'
        >{'匯入'}</Button>
        <Button
            flat
            onTouchTap={exportFile}
-           type='button'
        >{'匯出'}</Button>
    </div>)
 

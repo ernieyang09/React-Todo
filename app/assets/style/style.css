@@ -9,3 +9,31 @@ html {
 .input-group {
   display: inline-block;;
 }
+
+
+ul li {
+  list-style: none;
+}
+
+ul li .input-group{
+  padding-top: 12px;
+}
+
+ul li .input-group input {
+  padding: 3px;
+}
+
+
+#Footer{
+  font-size: 18px;
+}
+
+#Footer .Active{
+  font-weight: bold;
+  color:red;
+}
+
+#Footer .toggleShow{
+  cursor: pointer;
+  padding: 0 10px
+}
