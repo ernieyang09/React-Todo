@@ -10,28 +10,34 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: ['./app/app.js'],
+  entry: ['./app/app.jsx'],
   output:{
     path: path.resolve(__dirname,'build'),
     filename: 'bundle.js'
   },
   resolve:{
-    modules:['node_modules'],
+    modules:['node_modules']
   },
   module:{
-    loaders:[
-      {
-        loader:'babel-loader',
-        test: /\.js$/,
-        include: path.resolve(__dirname, 'app')
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
-      }
+    rules: [
+            // {
+            //     test: /\.jsx?$/,
+            //     enforce: 'pre',
+            //     include: path.resolve(__dirname, 'app'),
+            //     loader: 'eslint-loader'
+            // },
+            {
+              loader:'babel-loader',
+              test: /\.jsx?$/,
+              include: path.resolve(__dirname, 'app')
+            },
+            {
+              loader: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: 'css-loader'
+              }),
+              test: /\.css$/
+            }
     ]
   },
   devServer:{
