@@ -1,18 +1,20 @@
 import ToDoConstants from '../constants/ToDoConstants';
 
+
+export const createTodo = () => {
+  return (dispatch,getstate) => {
+    const state = getstate();
+    dispatch(createTodoM(state.getIn(['UIHandler','addInputText'])))
+  }
+}
+
 export const createTodoM = (text) => ({
   type:ToDoConstants.ToDoCreate,
   text:text
 })
 
-export const createTodo = () => {
-  return (dispatch,getstate) => {
-    const state = getstate();
-    dispatch(createTodoM(state.getIn(['FormHandler','addInputText'])))
-  }
-}
 
-export const changeText = (payload: {text:string}) => ({
-      type:ToDoConstants.ToDoAddDraft,
-      text:payload.text
-});
+export const deleteToDo = (id:number) =>({
+  type:ToDoConstants.ToDoDelete,
+  id:id
+})

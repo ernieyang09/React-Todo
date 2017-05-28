@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 
 
-export const FormInitialState = Immutable.fromJS({
+export const UIInitialState = Immutable.fromJS({
     addInputText:'',
     isEdit:'',
     editInputText:''

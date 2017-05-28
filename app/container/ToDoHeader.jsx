@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import TodoHeader from '../components/TodoHeader.jsx';
-
-import {createTodo,changeText} from '../actions/ToDoAction';
+import {createTodo} from '../actions/ToDoAction';
+import {changeText} from '../actions/UIActions'
 
 
 const mapStateToProps = (state) => ({
-  addText:state.getIn(['FormHandler','addInputText'])
+  addText:state.getIn(['UIHandler','addInputText'])
 });
 
 

@@ -1,13 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Immutable from 'immutable';
+import ToDoViewItem from './ToDoViewItem.jsx';
 
-const ToDoList = ({ToDoItems,...props}) =>{
+const ToDoList = ({ToDoItems,onDelete,onEditMode,onCancelEditMode,onEditUpdate}) =>{
   return (
       <ul>
           {
-            ToDoItems.map((ToDo,index)=>{
-                  return  <li key={ToDo.id}>{ToDo.text}</li>
-              })
+            ToDoItems.map((ToDo,index)=>(
+                <ToDoViewItem
+                    ToDo={ToDo}
+                    key={ToDo.get('id')}
+                    onDelete={onDelete}
+                    onEditMode={onEditMode}
+                />
+              ))
           }
       </ul>
 
@@ -15,9 +22,11 @@ const ToDoList = ({ToDoItems,...props}) =>{
 }
 
 ToDoList.propTypes = {
-  ToDoItems:PropTypes.arrayOf(PropTypes.shape({
-    text:PropTypes.string.isRequired
-  }))
+  ToDoItems:PropTypes.instanceOf(Immutable.List),
+  onCancelEditMode:PropTypes.func.isRequired,
+  onDelete:PropTypes.func.isRequired,
+  onEditMode:PropTypes.func.isRequired,
+  onEditUpdate:PropTypes.func.isRequired
 }
 
 ToDoList.defaultProps = {

@@ -1,7 +1,7 @@
 import ToDoConstants from '../constants/ToDoConstants';
-import { FormInitialState } from '../constants/model/FormModel.jsx'
+import { UIInitialState } from '../constants/model/UIModel.jsx'
 
-const FormHandler = (state = FormInitialState,action) => {
+const UIHandler = (state = UIInitialState,action) => {
   switch(action.type){
     case ToDoConstants.ToDoAddDraft:{
       return state.set('addInputText',action.text);
@@ -11,4 +11,4 @@ const FormHandler = (state = FormInitialState,action) => {
   }
 }
 
-export default FormHandler;
+export default UIHandler;
