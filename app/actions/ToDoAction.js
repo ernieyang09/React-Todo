@@ -1,5 +1,5 @@
 import ToDoConstants from '../constants/ToDoConstants';
-
+import {EditMode} from '../actions/UIActions';
 
 export const createTodo = () => {
   return (dispatch,getstate) => {
@@ -13,8 +13,27 @@ export const createTodoM = (text) => ({
   text:text
 })
 
+export const ToggleComplete = (id:number) => ({
+  type:ToDoConstants.ToDoToggleComplete,
+  id:id
+})
 
 export const deleteToDo = (id:number) =>({
   type:ToDoConstants.ToDoDelete,
   id:id
+})
+
+export const EditUpdate = () =>(
+  (dispatch,getstate) => {
+    const state = getstate();
+    dispatch(EditUpdateM(state.getIn(['UIHandler'])))
+    dispatch(EditMode({id:null}))
+  }
+)
+
+
+export const EditUpdateM = (UIstate) =>({
+  type:ToDoConstants.ToDoUpdate,
+  id:UIstate.get('isEdit'),
+  text:UIstate.get('editInputText')
 })

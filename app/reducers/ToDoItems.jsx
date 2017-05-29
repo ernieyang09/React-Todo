@@ -13,6 +13,24 @@ const ToDoItems = (state = List([]),action) => {
         text: action.text
       }));
     }
+    case ToDoConstants.ToDoToggleComplete:{
+      return state.update(
+        state.findIndex(function(item) {
+          return item.get("id") === action.id;
+        }), function(item) {
+          return item.set("isComplete", !item.get("isComplete"));
+        }
+      );
+    }
+    case ToDoConstants.ToDoUpdate:{
+      return state.update(
+        state.findIndex(function(item) {
+          return item.get("id") === action.id;
+        }), function(item) {
+          return item.set("text", action.text);
+        }
+      );
+    }
     case ToDoConstants.ToDoDelete:{
       return state.filter((ToDo)=>(ToDo.get('id')!==action.id));
     }
