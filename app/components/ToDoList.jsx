@@ -31,7 +31,7 @@ const ToDoList = ({
 
   return (
       <ul
-          className='list-group'  
+          className='list-group'
       >
           {
             VisibleToDos.map((ToDo,index)=>
@@ -40,8 +40,8 @@ const ToDoList = ({
                         isComplete={ToDo.get('isComplete')}
                         key={ToDo.get('id')}
                         onChangeComplete={function(){onChangeComplete(ToDo.get('id'))}}
-                        onClickDelete={function (){if(confirm('確定要刪除')){ onDelete(ToDo.get('id')) }}}
-                        onClickEdit={function(){onEditMode(ToDo.get('id'))}}
+                        onClickDelete={function (e){e.stopPropagation();if(confirm('確定要刪除')){ onDelete(ToDo.get('id')) }}}
+                        onClickEdit={function(e){e.stopPropagation();onEditMode(ToDo.get('id'))}}
                         text={ToDo.get('text')}
                     />
                 :
