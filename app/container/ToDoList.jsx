@@ -4,9 +4,10 @@ import {ToggleComplete,deleteToDo,EditUpdate} from '../actions/ToDoAction';
 import {changeEditText,EditMode} from '../actions/UIActions'
 
 const mapStateToProps = (state) => ({
-  ToDoItems:state.get('ToDoItems'),
+  ToDoItems:state.getIn(['ToDoItems']),
   DraftID:state.getIn(['UIHandler','isEdit']),
-  DraftText:state.getIn(['UIHandler','editInputText'])
+  DraftText:state.getIn(['UIHandler','editInputText']),
+  ShowMode:state.get('ShowMode')
 });
 
 
@@ -17,8 +18,8 @@ const mapDispatchToProps = (dispatch) => ({
   onChangeComplete: (id:number) => {
     dispatch(ToggleComplete(id));
   },
-  onChangeEditText: (text: string)=>{
-    dispatch(changeEditText({text:text}));
+  onChangeEditText: (event)=>{
+    dispatch(changeEditText({text:event.target.value}));
   },
   onEditMode: (id:number) => {
     dispatch(EditMode({id:id}));

@@ -1,41 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Immutable from 'immutable';
 
-
-const ToDoViewItem = ({ToDo,onDelete,onEditMode,onChangeComplete}) => {
-
-  const handleDelClick = () => {
-    if(confirm('確定要刪除')){
-      onDelete(ToDo.get('id'))
-    }
-  }
-
-  const handlerCheck = (e) => {
-    onChangeComplete(ToDo.get('id'));
-  }
-
-  const handlerEditClick = () => {
-    onEditMode(ToDo.get('id'));
-  }
+const ToDoViewItem = ({
+  text,
+  isComplete,
+  onClickDelete,
+  onClickEdit,
+  onChangeComplete
+}) => {
 
   return(
       <li>
           <label>
               <input
-                  defaultChecked={ToDo.get('isComplete')}
-                  onChange={handlerCheck}
+                  checked={isComplete}
+                  onChange={onChangeComplete}
                   type='checkbox'
               />
-              {ToDo.get('text')}
+              {text}
           </label>
           <input
-              onClick={handlerEditClick}
+              onClick={onClickEdit}
               type='button'
               value='編輯'
           />
           <input
-              onClick={handleDelClick}
+              onClick={onClickDelete}
               type='button'
               value='刪除'
           />
@@ -45,10 +35,11 @@ const ToDoViewItem = ({ToDo,onDelete,onEditMode,onChangeComplete}) => {
 }
 
 ToDoViewItem.propTypes = {
-  ToDo:PropTypes.instanceOf(Immutable.Map).isRequired,
+  isComplete:PropTypes.bool.isRequired,
   onChangeComplete:PropTypes.func.isRequired,
-  onDelete:PropTypes.func.isRequired,
-  onEditMode:PropTypes.func.isRequired
+  onClickDelete:PropTypes.func.isRequired,
+  onClickEdit:PropTypes.func.isRequired,
+  text:PropTypes.string.isRequired
 }
 
 export default ToDoViewItem;

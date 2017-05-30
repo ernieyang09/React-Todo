@@ -5,29 +5,21 @@ import Immutable from 'immutable';
 
 
 const ToDoEditItem = ({text,onChangeEditText,onEditUpdate,onCancelEditMode}) => {
-    const handlerText = (e) => {
-        onChangeEditText(e.target.value)
-    }
-    const handlerCancel = () => {
-        onCancelEditMode();
-    }
-    const handlerUpdate = () => {
-        onEditUpdate()
-    }
+
     return(
         <li>
             <input
-                onChange={handlerText}
+                onChange={onChangeEditText}
                 type='text'
                 value={text}
             />
             <input
-                onClick={handlerUpdate}
+                onClick={onEditUpdate}
                 type='button'
                 value='確定'
             />
             <input
-                onClick={handlerCancel}
+                onClick={onCancelEditMode}
                 type='button'
                 value='取消'
             />

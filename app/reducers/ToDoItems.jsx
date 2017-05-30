@@ -1,15 +1,12 @@
 import ToDoConstants from '../constants/ToDoConstants';
 import { List } from 'immutable';
-import { ToDo } from '../constants/model/ToDoModel.jsx'
+import  { ToDo } from '../constants/model/ToDoModel.jsx'
 
-
-const ToDoItems = (state = List([]),action) => {
+const ToDoItems = (state = new List() ,action) => {
   switch(action.type){
     case ToDoConstants.ToDoCreate:{
-      const id = Number(sessionStorage.id);
-      sessionStorage.setItem('id',id+1);
       return state.push(ToDo.merge({
-        id:id,
+        id:action.id,
         text: action.text
       }));
     }

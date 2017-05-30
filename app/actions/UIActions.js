@@ -23,13 +23,6 @@ export const EditMode = (payload: {id:number}) =>{
 }
 
 
-// export const EditModeM = (ToDo) =>({
-//       type:ToDoConstants.ToDoEditMode,
-//       id:ToDo.get('id'),
-//       text:ToDo.get('text')
-// })
-
-
 export const EditModeM = (ToDo) => {
   return {
       type:ToDoConstants.ToDoEditMode,

@@ -4,19 +4,43 @@ import Immutable from 'immutable';
 import ToDoViewItem from './ToDoViewItem.jsx';
 import ToDoEditItem from './ToDoEditItem.jsx';
 
-const ToDoList = ({ToDoItems,onDelete,onEditMode,onChangeEditText,onCancelEditMode,onEditUpdate,onChangeComplete,DraftID,DraftText}) =>{
+const getVisibleToDo = (ToDos,filter) => {
+  switch(filter){
+    case 'SHOW_ALL':
+      return ToDos
+    case 'SHOW_DONE':
+      return ToDos.filter(ToDo => ToDo.get('isComplete'))
+    case 'SHOW_UNDO':
+      return ToDos.filter(ToDo => !ToDo.get('isComplete'))
+  }
+}
+
+const ToDoList = ({
+  ToDoItems,
+  onDelete,
+  onEditMode,
+  onChangeEditText,
+  onCancelEditMode,
+  onEditUpdate,
+  onChangeComplete,
+  DraftID,
+  DraftText,
+  ShowMode
+}) =>{
+  const VisibleToDos = getVisibleToDo(ToDoItems,ShowMode);
 
   return (
       <ul>
           {
-            ToDoItems.map((ToDo,index)=>
+            VisibleToDos.map((ToDo,index)=>
                 (ToDo.get('id')!==DraftID)?
                     <ToDoViewItem
-                        ToDo={ToDo}
+                        isComplete={ToDo.get('isComplete')}
                         key={ToDo.get('id')}
-                        onChangeComplete={onChangeComplete}
-                        onDelete={onDelete}
-                        onEditMode={onEditMode}
+                        onChangeComplete={function(){onChangeComplete(ToDo.get('id'))}}
+                        onClickDelete={function (){if(confirm('確定要刪除')){ onDelete(ToDo.get('id')) }}}
+                        onClickEdit={function(){onEditMode(ToDo.get('id'))}}
+                        text={ToDo.get('text')}
                     />
                 :
                     <ToDoEditItem
@@ -36,6 +60,7 @@ const ToDoList = ({ToDoItems,onDelete,onEditMode,onChangeEditText,onCancelEditMo
 ToDoList.propTypes = {
   DraftID:PropTypes.number,
   DraftText:PropTypes.string,
+  ShowMode:PropTypes.string.isRequired,
   ToDoItems:PropTypes.instanceOf(Immutable.List),
   onCancelEditMode:PropTypes.func.isRequired,
   onChangeComplete:PropTypes.func.isRequired,

@@ -1,6 +1,9 @@
 import ToDoConstants from '../constants/ToDoConstants';
 import {EditMode} from '../actions/UIActions';
 
+
+
+
 export const createTodo = () => {
   return (dispatch,getstate) => {
     const state = getstate();
@@ -8,10 +11,15 @@ export const createTodo = () => {
   }
 }
 
-export const createTodoM = (text) => ({
-  type:ToDoConstants.ToDoCreate,
-  text:text
-})
+export const createTodoM = (text) => {
+  const id = Number(sessionStorage.id);
+  sessionStorage.setItem('id',id+1);
+  return {
+    type:ToDoConstants.ToDoCreate,
+    id:id,
+    text:text
+  }
+}
 
 export const ToggleComplete = (id:number) => ({
   type:ToDoConstants.ToDoToggleComplete,

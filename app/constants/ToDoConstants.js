@@ -8,5 +8,6 @@ export default keyMirror({
   ToDoDelete:null,
   ToDoToggleComplete:null,
   ToDoEditDraft:null,
-  ToDoEditMode:null
+  ToDoEditMode:null,
+  ToDoToggleMode:null
 });
