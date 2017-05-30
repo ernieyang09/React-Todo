@@ -3,18 +3,24 @@ import PropTypes from 'prop-types';
 
 const ToDoHeader = ({onCreateTodo,onChangeText,...props}) => {
   return (
-      <div>
+      <div
+          className='input-group'
+      >
           <input
+              className='form-control'
               onChange={onChangeText}
               type='text'
               value={props.addText}
           />
-          <input
-              onClick={onCreateTodo}
-              type='button'
-              value='新增'
+          <span className='input-group-btn'>
+              <input
+                  className='btn btn-default'
+                  onClick={onCreateTodo}
+                  type='button'
+                  value='新增'
 
-          />
+              />
+          </span>
       </div>
   );
 

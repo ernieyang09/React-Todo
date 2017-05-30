@@ -10,25 +10,29 @@ const ToDoViewItem = ({
 }) => {
 
   return(
-      <li>
-          <label>
+      <li
+          className='list-group-item'
+          onClick={onChangeComplete}
+      >
+          <input
+              checked={isComplete}
+              type='checkbox'
+          />
+          {text}
+          <span className='pull-right'>
               <input
-                  checked={isComplete}
-                  onChange={onChangeComplete}
-                  type='checkbox'
+                  className='btn btn-default btn-xs'
+                  onClick={onClickEdit}
+                  type='button'
+                  value='編輯'
               />
-              {text}
-          </label>
-          <input
-              onClick={onClickEdit}
-              type='button'
-              value='編輯'
-          />
-          <input
-              onClick={onClickDelete}
-              type='button'
-              value='刪除'
-          />
+              <input
+                  className='btn btn-default btn-xs'
+                  onClick={onClickDelete}
+                  type='button'
+                  value='刪除'
+              />
+          </span>
       </li>
   )
 

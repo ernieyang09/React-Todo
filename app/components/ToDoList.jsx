@@ -30,7 +30,9 @@ const ToDoList = ({
   const VisibleToDos = getVisibleToDo(ToDoItems,ShowMode);
 
   return (
-      <ul>
+      <ul
+          className='list-group'  
+      >
           {
             VisibleToDos.map((ToDo,index)=>
                 (ToDo.get('id')!==DraftID)?

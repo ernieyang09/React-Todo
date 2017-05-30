@@ -17,22 +17,22 @@ const ToDoFooter = ({
               filter='SHOW_ALL'
               onItemClick={function(){onChangeMode('SHOW_ALL')}}
           >
-              {'ALL'}{ToDoCount}
-          </FilterButton>{' '}
+              {'ALL'}
+          </FilterButton>{ToDoCount}{' '}
           <FilterButton
               current={ShowMode}
               filter='SHOW_DONE'
               onItemClick={function(){onChangeMode('SHOW_DONE')}}
           >
-              {'DONE'}{DoneCount}
-          </FilterButton>{' '}
+              {'DONE'}
+          </FilterButton>{DoneCount}{' '}
           <FilterButton
               current={ShowMode}
               filter='SHOW_UNDO'
               onItemClick={function(){onChangeMode('SHOW_UNDO')}}
           >
-              {'UNDO'}{ToDoCount-DoneCount}
-          </FilterButton>
+              {'UNDO'}
+          </FilterButton>{ToDoCount-DoneCount}
       </div>
   );
 

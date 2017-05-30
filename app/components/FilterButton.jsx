@@ -7,9 +7,13 @@ const FilterButton = ({
 }) => {
 
   return (
-      <span onClick={onItemClick}>
+      <span
+          className='btn btn-default'
+          onClick={onItemClick}
+      >
           {children}
       </span>
+
   );
 
 

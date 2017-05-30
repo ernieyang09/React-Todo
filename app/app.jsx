@@ -1,4 +1,5 @@
 require('./assets/style/style.css');
+require('bootstrap-css-only');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,6 +8,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import Reducers from './reducers/index.jsx';
 import ToDoApp from './components/ToDoApp.jsx';
+
 
 sessionStorage.setItem('id',0);
 

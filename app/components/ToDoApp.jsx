@@ -5,10 +5,17 @@ import ToDoFooter from '../container/ToDoFooter.jsx'
 
 const ToDoApp = () => {
     return(
-        <div>
-            <ToDoHeader />
-            <ToDoList />
-            <ToDoFooter />
+        <div className='panel panel-warning'>
+            <div className="panel-heading">
+                <h3 className="panel-title">{'TodoApp'}</h3>
+            </div>
+            <div className="panel-body">
+                <ToDoHeader />
+                <ToDoList />
+            </div>
+            <div className='panel-footer'>
+                <ToDoFooter />
+            </div>
         </div>
     )
 }
