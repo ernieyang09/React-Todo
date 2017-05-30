@@ -5,7 +5,7 @@ import ToDoFooter from '../container/ToDoFooter.jsx'
 
 const ToDoApp = () => {
     return(
-        <div className='panel panel-warning'>
+        <div className='panel panel-warning' >
             <div className="panel-heading">
                 <h3 className="panel-title">{'TodoApp'}</h3>
             </div>

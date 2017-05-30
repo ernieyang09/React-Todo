@@ -1,18 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const getActiveStatus = (current,filter) => current===filter;
+const getStyle = (filter) => {
+  switch(filter){
+    case 'SHOW_ALL':
+      return 'btn-primary';
+    case 'SHOW_DONE':
+      return 'btn-success';
+    case 'SHOW_UNDO':
+      return 'btn-danger';
+  }
+}
+
 const FilterButton = ({
   onItemClick,
-  children
+  children,
+  current,
+  filter
 }) => {
 
+  const Status = getActiveStatus(current,filter);
+
   return (
-      <span
-          className='btn btn-default'
+      <input
+          className={`btn btn-sm ${getStyle(filter)}`}
+          disabled={Status}
           onClick={onItemClick}
-      >
-          {children}
-      </span>
+          style={{marginRight:2,marginLeft:5}}
+          type='button'
+          value={children}
+      />
 
   );
 
@@ -21,6 +39,8 @@ const FilterButton = ({
 
 FilterButton.propTypes = {
   children:PropTypes.node,
+  current:PropTypes.string.isRequired,
+  filter:PropTypes.string.isRequired,
   onItemClick:PropTypes.func.isRequired
 }
 

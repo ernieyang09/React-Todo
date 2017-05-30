@@ -5,6 +5,7 @@ const ToDoHeader = ({onCreateTodo,onChangeText,...props}) => {
   return (
       <div
           className='input-group'
+          style={{marginBottom:15}}
       >
           <input
               className='form-control'

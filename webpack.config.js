@@ -53,6 +53,16 @@ module.exports = {
             {
               test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
               loader: "url-loader?limit=10000&mimetype=image/svg+xml"
+            },
+            {
+              test: /\.scss$/,
+              use: [{
+                  loader: "style-loader" // creates style nodes from JS strings
+              }, {
+                  loader: "css-loader?modules" // translates CSS into CommonJS
+              }, {
+                  loader: "sass-loader" // compiles Sass to CSS
+              }]
             }
     ]
   },

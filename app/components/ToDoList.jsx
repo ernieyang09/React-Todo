@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
-import ToDoViewItem from './ToDoViewItem.jsx';
-import ToDoEditItem from './ToDoEditItem.jsx';
+import ToDoViewItem from './ToDoListItem/ToDoViewItem.jsx';
+import ToDoEditItem from './ToDoListItem/ToDoEditItem.jsx';
 
 const getVisibleToDo = (ToDos,filter) => {
   switch(filter){
